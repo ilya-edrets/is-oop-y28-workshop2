@@ -6,11 +6,11 @@ namespace Core.Entities
     {
         public Guid Id { get; init; } = Guid.NewGuid();
 
-        public string OwnerId { get; init; }
+        public string OwnerId { get; init; } = string.Empty;
 
-        public DateTime CreatedAt { get; init; }
+        public DateTime CreatedAt { get; init; } = DateTime.Now;
 
-        public string Content { get; init; }
+        public string Content { get; init; } = string.Empty;
 
         // for Dapper
         public Note() { }
@@ -18,7 +18,6 @@ namespace Core.Entities
         public Note(string ownerId, string content)
         {
             OwnerId = ownerId;
-            CreatedAt = DateTime.Now;
             Content = content;
         }
     }

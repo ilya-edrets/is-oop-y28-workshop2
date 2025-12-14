@@ -6,6 +6,7 @@ namespace Core.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        // Создаем отдельный метод для регистрации ядра в DI
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
             services.AddLogging();

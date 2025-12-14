@@ -27,5 +27,11 @@ namespace DataAccess.Postgres
 
             return Task.FromResult(user);
         }
+
+        public Task<IReadOnlyCollection<User>> GetAll()
+        {
+            IReadOnlyCollection<User> result = _userStorage.Values;
+            return Task.FromResult(result);
+        }
     }
 }

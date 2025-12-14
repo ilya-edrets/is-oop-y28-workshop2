@@ -1,12 +1,9 @@
 ﻿using Core.Abstractions;
 using Core.Entities;
 using Dapper;
-using Microsoft.Extensions.Options;
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace DataAccess.Postgres
 {
@@ -26,12 +23,14 @@ namespace DataAccess.Postgres
                 VALUES (@Id, @OwnerId, @CreatedAt, @Content);
                 """;
 
+            // Используем именованные параметры для защиты от SQL Injection
             var parameters = new DynamicParameters();
             parameters.Add("Id", note.Id);
             parameters.Add("OwnerId", note.OwnerId);
             parameters.Add("CreatedAt", note.CreatedAt);
             parameters.Add("Content", note.Content);
 
+            // Соединение с БД это unmanaged ресурс, поэтому using обязателен
             using var connection = _dapperContext.CreateConnection();
             await connection.ExecuteAsync(query, parameters);
         }

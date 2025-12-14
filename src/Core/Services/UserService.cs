@@ -1,6 +1,7 @@
 ﻿using Core.Abstractions;
 using Core.Entities;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -31,6 +32,12 @@ namespace Core.Services
             _logger.LogInformation("New user {userName} was created", userName);
 
             return OperationResult.Success();
+        }
+
+        public async Task<OperationResult<IReadOnlyCollection<User>>> GetAllUsers()
+        {
+            var users = await _storage.GetAll();
+            return OperationResult<IReadOnlyCollection<User>>.Success(users);
         }
 
         public async Task<OperationResult<User>> GetUser(string userName)

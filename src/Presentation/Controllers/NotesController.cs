@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
+    // Контроллеры асп.нета позволяют реализовывать паттерн MVC
+    // Атрибут Authorize требует,что бы пользователи были залогигены прежде чем смогут вызывать методы этого контроллера
+    [Authorize()]
     [Route("notes")]
-    [Authorize]
     public class NotesController : Controller
     {
         private readonly INotesService _notesService;
@@ -46,6 +48,7 @@ namespace Presentation.Controllers
             return base.BadRequest(result.Error);
         }
 
+        // "{id:guid}" - говорит о том, что параметр Id это гуид и он явялется частью урла для этого метода
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteNote([FromRoute]Guid id)
         {

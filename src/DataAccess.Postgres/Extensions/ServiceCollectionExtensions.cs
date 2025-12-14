@@ -5,6 +5,7 @@ namespace DataAccess.Postgres.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        // Создаем отдельный метод для регистрации DataAccess слоя в DI
         public static IServiceCollection AddDataAccess(this IServiceCollection services, string connectionString)
         {
             services.AddSingleton<INotesStorage, NotesStorage>();

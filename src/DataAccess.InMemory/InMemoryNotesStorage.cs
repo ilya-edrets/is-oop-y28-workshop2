@@ -29,10 +29,10 @@ namespace DataAccess.Postgres
 
         public Task<IReadOnlyCollection<Note>> GetAllNotesByUserName(string ownerId)
         {
-            var notes = _storage
+            IReadOnlyCollection<Note> notes = _storage
                 .Where(x => x.Value.OwnerId == ownerId)
                 .Select(x => x.Value)
-                .ToList() as IReadOnlyCollection<Note>;
+                .ToList();
 
             return Task.FromResult(notes);
         }

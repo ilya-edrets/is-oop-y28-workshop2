@@ -1,10 +1,12 @@
 ﻿using DbUp;
 using System.Reflection;
 
-namespace DataAccess.Postgres.Extensions
+namespace DataAccess.Postgres.Helpers
 {
-    public static class DatabaseExtension
+    public static class DatabaseHelper
     {
+        // Запускает выполнение всех скриптов из папки SqlScripts если они еще не были выполнены на указанной БД
+        // Метод нужно вызвать до запуска веб-сервиса, т.е. где-то рядом с методом Main
         public static bool MigrateDatabase(string connectionString)
         {
             EnsureDatabase.For.PostgresqlDatabase(connectionString);

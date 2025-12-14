@@ -1,6 +1,6 @@
 ﻿namespace Core.Abstractions
 {
-    internal interface IPasswordHashService
+    public interface IPasswordHashService
     {
         string GetHash(string password);
 

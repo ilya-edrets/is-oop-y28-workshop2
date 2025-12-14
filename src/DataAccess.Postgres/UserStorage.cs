@@ -1,6 +1,7 @@
 ﻿using Core.Abstractions;
 using Core.Entities;
 using Dapper;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DataAccess.Postgres
@@ -44,6 +45,19 @@ namespace DataAccess.Postgres
             var user = await connection.QueryFirstOrDefaultAsync<User>(query, parameters);
 
             return user;
+        }
+
+        public async Task<IReadOnlyCollection<User>> GetAll()
+        {
+            var query = """
+                SELECT name, password_hash
+                FROM users;
+                """;
+
+            using var connection = _dapperContext.CreateConnection();
+            var users = await connection.QueryAsync<User>(query);
+
+            return users.AsList();
         }
     }
 }
